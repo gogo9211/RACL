@@ -19,8 +19,12 @@ void __stdcall hook_stub( std::uintptr_t inst )
 	const auto dll_info_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x18 );
 
 	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x200 );
+	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x260 );
 
-	utilities::io::log( "[RACL] -> Analyzing DLL: %ls | %p | %x\n\n", dll_info->path, dll_info->base, dll_info->size );
+	if ( dll_info->base )
+		utilities::io::log( "[RACL] -> Analyzing DLL: %ls | %p | %x\n\n", dll_info->path, dll_info->base, dll_info->size );
+	else
+		utilities::io::log( "[RACL] -> Analyzing Allocation: %p | %x\n\n", allocation_info->base, allocation_info->size );
 
 	for ( auto i = 0u; i < length; ++i )
 	{
@@ -68,9 +72,9 @@ void entry( )
 
 		// lazy fix:
 		std::uint8_t jump[] = { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xE0 };
-		*reinterpret_cast<std::uintptr_t*>(jump + 1) = ac + 0x18;
+		*reinterpret_cast< std::uintptr_t* >( jump + 1 ) = ac + 0x18;
 		
-		std::memcpy(reinterpret_cast<void*>(old + 0x18), jump, sizeof(jump));
+		std::memcpy( reinterpret_cast< void* >( old + 0x18 ), jump, sizeof( jump ) );
 	}
 }
 

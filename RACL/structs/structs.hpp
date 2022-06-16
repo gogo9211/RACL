@@ -21,3 +21,10 @@ struct dll_info_t
 
 	const wchar_t* const path;
 };
+
+struct allocation_info_t
+{
+	std::uintptr_t base;
+
+	std::uint32_t size;
+};
