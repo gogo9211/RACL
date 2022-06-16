@@ -58,13 +58,19 @@ __declspec( naked ) void stub( )
 
 void entry( )
 {
-	utilities::io::initiate( "RACL - gogo1000, ozzy" );
+	utilities::io::initiate( "RACL - gogo1000, ozzy, 0x90, CompiledCode" );
     
 	if ( const auto ac = find_ac( ) )
 	{
 		utilities::io::log( "[RACL] -> scan_module_for_known_signatures:	0x%X\n\n", ac );
 
-		old = tramp_hook( ac, reinterpret_cast< std::uintptr_t >( &stub ), 7 );
+		old = tramp_hook( ac, reinterpret_cast< std::uintptr_t >( &stub ), 7 );	
+
+		// lazy fix:
+		std::uint8_t jump[] = { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xE0 };
+		*reinterpret_cast<std::uintptr_t*>(jump + 1) = ac + 0x18;
+		
+		std::memcpy(reinterpret_cast<void*>(old + 0x18), jump, sizeof(jump));
 	}
 }
 
