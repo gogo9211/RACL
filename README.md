@@ -13,4 +13,3 @@ For an official forum release of this, check out our thread on [vermillion](PLAC
 
 ![](https://cdn.discordapp.com/attachments/986782010490122280/986793488316268575/unknown.png)
 
-![](https://cdn.discordapp.com/attachments/986782010490122280/986794074075979886/unknown.png)
