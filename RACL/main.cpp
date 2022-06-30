@@ -18,8 +18,8 @@ void __stdcall hook_stub( std::uintptr_t inst )
 
 	const auto dll_info_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x18 );
 
-	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x200 );
-	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x260 );
+	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x24C );
+	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x20C );
 
 	if ( dll_info->base )
 		utilities::io::log( "[RACL] -> Analyzing DLL: %ls | %p | %x\n\n", dll_info->path, dll_info->base, dll_info->size );
