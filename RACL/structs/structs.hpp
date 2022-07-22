@@ -8,7 +8,7 @@ struct rule_t
 
 	std::string short_name;
 
-	std::uint32_t unk;
+	std::uint32_t unk[3];
 };
 
 struct dll_info_t

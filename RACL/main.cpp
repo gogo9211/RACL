@@ -9,8 +9,8 @@
 
 void __stdcall hook_stub( std::uintptr_t inst )
 {
-	const auto rule_set_vector_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x68 );
-	const auto rule_set_vector_end = *reinterpret_cast< std::uintptr_t* >( inst + 0x68 + sizeof( std::uintptr_t ) );
+	const auto rule_set_vector_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x6C );
+	const auto rule_set_vector_end = *reinterpret_cast< std::uintptr_t* >( inst + 0x6C + sizeof( std::uintptr_t ) );
 
 	const auto size = rule_set_vector_end - rule_set_vector_start;
 
@@ -18,8 +18,8 @@ void __stdcall hook_stub( std::uintptr_t inst )
 
 	const auto dll_info_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x18 );
 
-	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x24C );
-	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x20C );
+	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x250 );
+	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x234 );
 
 	if ( dll_info->base )
 		utilities::io::log( "[RACL] -> Analyzing DLL: %ls | %p | %x\n\n", dll_info->path, dll_info->base, dll_info->size );
