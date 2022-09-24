@@ -18,7 +18,7 @@ void __stdcall hook_stub( std::uintptr_t inst )
 
 	const auto dll_info_start = *reinterpret_cast< std::uintptr_t* >( inst + 0x18 );
 
-	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x250 );
+	const auto dll_info = reinterpret_cast< dll_info_t* >( dll_info_start + 0x21C );
 	const auto allocation_info = reinterpret_cast< allocation_info_t* >( dll_info_start + 0x234 );
 
 	if ( dll_info->base )
